@@ -1,0 +1,20 @@
+version: "3"
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ./php/Dockerfile
+    container_name: php
+    volumes:
+      - ./htdocs:/var/www/html
+  httpd:
+    build:
+      context: .
+      dockerfile: ./httpd/Dockerfile
+    container_name: httpd
+    volumes:
+      - ./htdocs:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - php
